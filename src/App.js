@@ -1,5 +1,13 @@
+import Home from "./pages/Home";
+import Video from "./pages/Video";
+
 function App() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      {/* <Home /> */}
+      <Video />
+    </div>
+  );
 }
 
 export default App;
