@@ -4,8 +4,8 @@ import Video from "./pages/Video";
 function App() {
   return (
     <div>
-      <Home />
-      {/* <Video /> */}
+      {/* <Home /> */}
+      <Video />
     </div>
   );
 }
