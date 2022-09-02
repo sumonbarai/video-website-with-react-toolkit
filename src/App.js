@@ -12,7 +12,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/videos/:id" element={<Video />} />
+          <Route path="/videos/:VideoId" element={<Video />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
