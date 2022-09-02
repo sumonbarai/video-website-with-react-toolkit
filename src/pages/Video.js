@@ -2,9 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import RelatedVideo from "../components/description/RelatedVideo";
+
+import RelatedVideoList from "../components/description/RelatedVideoList";
 import VideoDescription from "../components/description/VideoDescription";
 import VideoPlayer from "../components/description/VideoPlayer";
+
 import { fetchVideoThunk } from "../features/video/videoSlice";
 
 const Video = () => {
@@ -13,11 +15,13 @@ const Video = () => {
   const { video, isLoading, isError, error } = useSelector(
     (state) => state.video
   );
-  const { id, link, title } = video || {};
+
+  const { id, link, title, tags } = video || {};
 
   useEffect(() => {
     dispatch(fetchVideoThunk(VideoId));
   }, [VideoId, dispatch]);
+
   let content = null;
   if (isLoading) {
     content = <div className="col-span-12">Loading...</div>;
@@ -32,7 +36,7 @@ const Video = () => {
           <VideoPlayer link={link} title={title} />
           <VideoDescription video={video} />
         </div>
-        <RelatedVideo />
+        <RelatedVideoList id={id} tags={tags}></RelatedVideoList>
       </div>
     );
   }

@@ -8,8 +8,6 @@ const Grid = () => {
   const { videos, isLoading, isError, error } = useSelector(
     (state) => state.videos
   );
-
-  console.log(videos);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchVideosThunk());
