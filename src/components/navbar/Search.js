@@ -18,7 +18,7 @@ const Search = () => {
     if (!match) {
       navigate("/");
     }
-    // setInputValue("");
+    setInputValue("");
   };
 
   return (

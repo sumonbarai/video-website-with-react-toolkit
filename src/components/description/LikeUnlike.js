@@ -1,8 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import likeSvg from "../../assets/like.svg";
 import UnLikeSvg from "../../assets/unlike.svg";
+import { likeIncreaseThunk } from "../../features/video/videoSlice";
 
-const LikeUnlike = ({ likes, unlikes }) => {
+const LikeUnlike = ({ likes, unlikes, id }) => {
+  const dispatch = useDispatch();
+  // const handleIncrease = () => {
+  //   dispatch(likeIncreaseThunk({ id, data: likes + 1 }));
+  // };
+
   return (
     <div className="flex gap-10 w-48">
       <div className="flex gap-1">

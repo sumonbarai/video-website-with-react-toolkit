@@ -6,6 +6,7 @@ const Tag = ({ title }) => {
   const dispatch = useDispatch();
   const { selectedTag } = useSelector((state) => state.filter);
   const isSelected = selectedTag.includes(title) ? true : false;
+
   const handleClick = () => {
     if (isSelected) {
       dispatch(removeTag(title));

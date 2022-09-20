@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { reset } from "../../features/filter/filterSlice";
 import { fetchTagsThunk } from "../../features/tags/tagsSlice";
 import Tag from "./Tag";
 
@@ -10,12 +11,25 @@ const Tags = () => {
   useEffect(() => {
     dispatch(fetchTagsThunk());
   }, [dispatch]);
+
+  const handleReset = () => {
+    dispatch(reset());
+  };
+
   return tags.length > 0 ? (
     <section>
-      <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 border-b overflow-y-auto">
-        {tags.map((tag) => (
-          <Tag key={tag.id} title={tag.title}></Tag>
-        ))}
+      <div className="max-w-7xl mx-auto flex justify-between overflow-y-auto items-center">
+        <div className=" px-5 py-6 lg:px-0 flex items-center gap-2 border-b ">
+          {tags.map((tag) => (
+            <Tag key={tag.id} title={tag.title}></Tag>
+          ))}
+        </div>
+        <button
+          className="bg-blue-500 rounded-lg p-2 text-white cursor-pointer"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
       </div>
     </section>
   ) : null;
