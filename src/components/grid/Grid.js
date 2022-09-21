@@ -5,13 +5,14 @@ import { fetchVideosThunk } from "../../features/videos/videosSlice";
 import GridVideoItem from "./GridVideoItem";
 
 const Grid = () => {
+  const dispatch = useDispatch();
   const { videos, isLoading, isError, error } = useSelector(
     (state) => state.videos
   );
   const { selectedTag, inputText, authorName } = useSelector(
     (state) => state.filter
   );
-  const dispatch = useDispatch();
+  const { sliceStart, sliceEnd } = useSelector((state) => state.paginate);
 
   useEffect(() => {
     dispatch(fetchVideosThunk({ selectedTag, inputText, authorName }));
@@ -25,9 +26,11 @@ const Grid = () => {
   } else if (!isLoading && !isError && videos.length === 0) {
     content = <div className="col-span-12">No Video found</div>;
   } else if (!isLoading && !isError && videos.length > 0) {
-    content = videos.map((video) => (
-      <GridVideoItem key={video.id} video={video}></GridVideoItem>
-    ));
+    content = videos
+      .slice(sliceStart, sliceEnd)
+      .map((video) => (
+        <GridVideoItem key={video.id} video={video}></GridVideoItem>
+      ));
   }
 
   return (

@@ -10,6 +10,7 @@ const getVideo = async (selectedTag, inputText, authorName) => {
   if (authorName !== "") {
     likeSearch = `author=${authorName}`;
   }
+
   const response = await axios.get(`/videos?${likeSearch}`);
   return response.data;
 };

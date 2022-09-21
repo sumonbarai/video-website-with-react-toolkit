@@ -1,19 +1,39 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { paginate } from "../../features/pagination/paginationSlice";
 
 const Pagination = () => {
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(0);
+  const { videos } = useSelector((state) => state.videos);
+
+  if (videos.length > 0) {
+    var numberOfPage = Math.ceil(
+      videos.length / process.env.REACT_APP_PAGINATE_PER_PAGE
+    );
+  }
+  const handPagination = (index) => {
+    setCurrentPage(index);
+    dispatch(paginate(index));
+  };
+
   return (
     <section className="pt-12">
       <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 justify-end">
-        <div className="bg-blue-600 text-white px-4 py-1 rounded-full">1</div>
-        <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-          2
-        </div>
-        <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-          3
-        </div>
-        <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full">
-          4
-        </div>
+        {[...Array(numberOfPage).keys()].map((number, index) => {
+          return (
+            <button
+              key={index}
+              className={`text-white px-4 py-1 rounded-full cursor-pointer ${
+                currentPage === number ? "bg-blue-600" : "bg-blue-200"
+              }`}
+              onClick={() => handPagination(index)}
+            >
+              {number + 1}
+            </button>
+          );
+        })}
       </div>
     </section>
   );

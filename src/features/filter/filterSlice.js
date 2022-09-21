@@ -13,6 +13,7 @@ const filterSlice = createSlice({
     addTag: (state, action) => {
       state.selectedTag.push(action.payload);
       state.authorName = "";
+      state.paginate = "";
     },
 
     removeTag: (state, action) => {
@@ -21,23 +22,26 @@ const filterSlice = createSlice({
         state.selectedTag.splice(indexToRemove, 1);
       }
       state.authorName = "";
+      state.paginate = "";
     },
 
     searched: (state, action) => {
       state.inputText = action.payload;
       state.authorName = "";
+      state.paginate = "";
     },
 
     searchedBytAuthor: (state, action) => {
       state.authorName = action.payload;
       state.inputText = "";
       state.selectedTag = [];
+      state.paginate = "";
     },
-
     reset: (state, action) => {
       state.selectedTag = [];
       state.inputText = "";
       state.authorName = "";
+      state.paginate = "";
     },
   },
 });

@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "../../features/filter/filterSlice";
+import { paginate } from "../../features/pagination/paginationSlice";
 import { fetchTagsThunk } from "../../features/tags/tagsSlice";
 import Tag from "./Tag";
 
@@ -14,6 +15,7 @@ const Tags = () => {
 
   const handleReset = () => {
     dispatch(reset());
+    dispatch(paginate(0));
   };
 
   return tags.length > 0 ? (
