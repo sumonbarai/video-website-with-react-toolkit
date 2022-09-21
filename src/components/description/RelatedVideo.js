@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { searchedBytAuthor } from "../../features/filter/filterSlice";
 
 const RelatedVideo = ({ videoItem }) => {
-  const { id, thumbnail, title, duration, views, date } = videoItem;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id, thumbnail, title, duration, views, date, author } = videoItem;
+  const handleAuthorName = () => {
+    navigate("/");
+    dispatch(searchedBytAuthor(author));
+  };
   return (
     <div className="col-span-full lg:col-auto max-h-[570px] overflow-y-auto">
       {/* <!-- single related video --> */}
@@ -20,12 +28,12 @@ const RelatedVideo = ({ videoItem }) => {
           <Link to={`/videos/${id}`}>
             <p className="text-slate-900 text-sm font-semibold">{title}</p>
           </Link>
-          <Link
-            className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-            to="/"
+          <div
+            className="text-gray-400 text-xs mt-2 hover:text-gray-600 cursor-pointer"
+            onClick={handleAuthorName}
           >
-            Learn with Sumit
-          </Link>
+            {author}
+          </div>
           <p className="text-gray-400 text-xs mt-1">
             {views} . {date}
           </p>

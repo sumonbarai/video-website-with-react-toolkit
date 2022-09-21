@@ -8,12 +8,14 @@ const Grid = () => {
   const { videos, isLoading, isError, error } = useSelector(
     (state) => state.videos
   );
-  const { selectedTag, inputText } = useSelector((state) => state.filter);
+  const { selectedTag, inputText, authorName } = useSelector(
+    (state) => state.filter
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchVideosThunk({ selectedTag, inputText }));
-  }, [dispatch, inputText, selectedTag]);
+    dispatch(fetchVideosThunk({ selectedTag, inputText, authorName }));
+  }, [dispatch, inputText, selectedTag, authorName]);
 
   let content;
   if (isLoading) {

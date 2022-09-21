@@ -4,8 +4,13 @@ const getSingleVideo = async (id) => {
   return response.data;
 };
 
-export const updateLike = async (id, data) => {
-  const response = await axios.put(`/videos/${id}`, data);
+export const LikeIncrease = async (id, data) => {
+  const response = await axios.patch(`/videos/${id}`, { likes: data });
   return response.data;
 };
+export const UnLikeIncrease = async (id, data) => {
+  const response = await axios.patch(`/videos/${id}`, { unlikes: data });
+  return response.data;
+};
+
 export default getSingleVideo;
